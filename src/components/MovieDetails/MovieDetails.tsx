@@ -21,7 +21,7 @@ export function MovieDetails({ movie }: MovieDetailsProps) {
       <div className="flex flex-col p-8 items-start w-full min-w-500">
         <h2 className="font-light">
           {name}
-          <span className="font-light text-xs py-2 px-4 ml-4 border border-secondary-text rounded-full inline-block w-12">
+          <span className="font-light text-xs py-2 px-4 ml-4 border border-secondary-text rounded-full inline-block w-10 h-10">
             {rating}
           </span>
         </h2>
