@@ -6,6 +6,7 @@ import { MovieDetails } from '@/components/MovieDetails/MovieDetails';
 import { MovieTile } from '@/components/MovieTile/MovieTile';
 import { GenreSelect } from '@/components/GenreSelect/GenreSelect';
 import { GENRE_LIST_OPTIONS } from '@/constants/genre-list-options';
+import { redirect } from 'next/navigation';
 export default async function Page({
   params,
   searchParams,
@@ -13,7 +14,9 @@ export default async function Page({
   params: { movieId: string };
   searchParams?: { [key: string]: string | undefined };
 }) {
-  const movie = await new MoviesService().getById(params.movieId);
+  const movie = await new MoviesService()
+    .getById(params.movieId)
+    .catch((err) => redirect('/'));
   const movies = await new MoviesService().getAll({
     search: searchParams?.query,
     searchBy: 'title',
