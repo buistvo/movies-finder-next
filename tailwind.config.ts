@@ -20,6 +20,7 @@ const config: Config = {
         'secondary-color': 'var(--secondary-color)',
         'secondary-text': 'var(--secondary-text)',
         background: 'var(--background)',
+        'workspace-footer': 'var(--workspace-footer)',
       },
     },
   },

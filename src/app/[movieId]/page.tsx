@@ -6,17 +6,26 @@ import { MovieDetails } from '@/components/MovieDetails/MovieDetails';
 import { MovieTile } from '@/components/MovieTile/MovieTile';
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: { movieId: string };
+  searchParams?: { [key: string]: string | undefined };
 }) {
   const movie = await new MoviesService().getById(params.movieId);
+  const movies = await new MoviesService().getAll({
+    search: searchParams?.query,
+    searchBy: 'title',
+    sortBy: 'title',
+    sortOrder: 'asc',
+    filter: undefined,
+  });
   return (
     <div>
-      <div className="bg-gray-900 relative min-h-400 p-4 mb-4">
+      <div className="bg-workspace relative p-4 mb-4">
         <div className="flex justify-between relative z-10 pt-4 pr-8 pl-8">
           <AppLogo />
           <Link href={'/'}>
-            <button className="bg-gray-900 text-red-500 hover:bg-gray-900">
+            <button className="bg-workspace text-primary-red hover:bg-gray-900">
               <Image
                 alt="magnifying-icon"
                 width={30}
@@ -28,17 +37,10 @@ export default async function Page({
         </div>
         <MovieDetails movie={movie} />
       </div>
-      <div className="flex flex-wrap">
-        <MovieTile movie={movie}></MovieTile>
-        <MovieTile movie={movie}></MovieTile>
-        <MovieTile movie={movie}></MovieTile>
-        <MovieTile movie={movie}></MovieTile>
-        <MovieTile movie={movie}></MovieTile>
-        <MovieTile movie={movie}></MovieTile>
-        <MovieTile movie={movie}></MovieTile>
-        <MovieTile movie={movie}></MovieTile>
-        <MovieTile movie={movie}></MovieTile>
-        <MovieTile movie={movie}></MovieTile>
+      <div className="bg-workspace flex flex-wrap mt-2">
+        {movies.data.map((movie) => (
+          <MovieTile key={movie.id} movie={movie}></MovieTile>
+        ))}
       </div>
     </div>
   );

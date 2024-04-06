@@ -15,7 +15,7 @@ export function SearchForm() {
   }
 
   return (
-    <div className="w-96 inline-block">
+    <div className="w-4/5 inline-block">
       <h2 className="font-thin text-left text-2xl">FIND YOUR MOVIE</h2>
       <form onSubmit={handleSubmit} className="flex justify-center">
         <input
@@ -27,7 +27,7 @@ export function SearchForm() {
           name="query"
         />
         <button
-          className="bg-primary-red text-white font-normal hover:bg-hover-red"
+          className="bg-primary-red text-white font-normal hover:bg-hover-red ml-2"
           data-testid="search-button"
           type="submit"
         >

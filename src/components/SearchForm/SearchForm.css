@@ -1,0 +1,19 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+}
+
+.search-button {
+  background-color: var(--primary-red);
+  color: #fff;
+  border-radius: 2px;
+  margin-left: 0.5rem;
+  width: 25%;
+}
+
+.input {
+  width: 100%;
+  border: none;
+  background-color: #2422427a;
+  padding-left: 1rem;
+}
