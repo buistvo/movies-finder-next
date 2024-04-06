@@ -8,6 +8,9 @@
   --background-end-rgb: 255, 255, 255;
   --primary-red: #f65261;
   --hover-red: #8d2c35;
+  --workspace: #232323;
+  --secondary-text: #b3b3b3;
+  --background: #555555;
 }
 
 @media (prefers-color-scheme: dark) {

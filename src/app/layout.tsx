@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <div>{children}</div>
+        <div className="bg-workspace">{children}</div>
       </body>
     </html>
   );

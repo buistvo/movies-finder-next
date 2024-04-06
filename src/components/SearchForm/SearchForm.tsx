@@ -1,6 +1,5 @@
 'use client';
 import { FormEvent } from 'react';
-import './SearchForm.css';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export function SearchForm() {
@@ -18,11 +17,11 @@ export function SearchForm() {
   return (
     <div className="w-96 inline-block">
       <h2 className="font-thin text-left text-2xl">FIND YOUR MOVIE</h2>
-      <form onSubmit={handleSubmit} className="search-container">
+      <form onSubmit={handleSubmit} className="flex justify-center">
         <input
           data-testid="search-input"
           type="text"
-          className="input"
+          className="w-full border-none bg-opacity-50 bg-gray-800 px-4"
           defaultValue={searchParams.get('query') || ''}
           placeholder="What do you want to watch?"
           name="query"
