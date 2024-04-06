@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  ---rgforegroundb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --primary-red: #f65261;
+  --hover-red: #8d2c35;
 }
 
 @media (prefers-color-scheme: dark) {
