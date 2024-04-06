@@ -28,7 +28,7 @@ export default async function Page({
           </button>
         </div>
         <div className="relative z-10">
-          <SearchForm></SearchForm>
+          <SearchForm query={searchParams?.query || ''}></SearchForm>
         </div>
       </div>
       <div className="bg-workspace">
