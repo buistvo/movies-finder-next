@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { AppLogo } from '@/components/AppLogo/AppLogo';
 import { MovieDetails } from '@/components/MovieDetails/MovieDetails';
 import { MovieTile } from '@/components/MovieTile/MovieTile';
+import { GenreSelect } from '@/components/GenreSelect/GenreSelect';
+import { GENRE_LIST_OPTIONS } from '@/constants/genre-list-options';
 export default async function Page({
   params,
   searchParams,
@@ -17,7 +19,7 @@ export default async function Page({
     searchBy: 'title',
     sortBy: 'title',
     sortOrder: 'asc',
-    filter: undefined,
+    filter: searchParams?.genre,
   });
   return (
     <div>
@@ -36,6 +38,12 @@ export default async function Page({
           </Link>
         </div>
         <MovieDetails movie={movie} />
+      </div>
+      <div>
+        <GenreSelect
+          initialSelectedGenre={searchParams?.genre || ''}
+          genreList={GENRE_LIST_OPTIONS}
+        ></GenreSelect>
       </div>
       <div className="bg-workspace flex flex-wrap mt-2">
         {movies.data.map((movie) => (
