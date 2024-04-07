@@ -1,10 +1,7 @@
 import { AppLogo } from '@/components/AppLogo/AppLogo';
-import { GenreSelect } from '@/components/GenreSelect/GenreSelect';
-import { MovieTile } from '@/components/MovieTile/MovieTile';
+import MovieList from '@/components/MovieList/MovieList';
 import { SearchForm } from '@/components/SearchForm/SearchForm';
-import { GENRE_LIST_OPTIONS } from '@/constants/genre-list-options';
 import { MoviesService } from '@/services/movies.service';
-import { useSearchParams } from 'next/navigation';
 
 export default async function Page({
   searchParams,
@@ -14,7 +11,7 @@ export default async function Page({
   const movies = await new MoviesService().getAll({
     search: searchParams?.query,
     searchBy: 'title',
-    sortBy: 'title',
+    sortBy: searchParams?.sortBy || 'title',
     sortOrder: 'asc',
     filter: searchParams?.genre,
   });
@@ -31,18 +28,11 @@ export default async function Page({
           <SearchForm query={searchParams?.query || ''}></SearchForm>
         </div>
       </div>
-      <div className="bg-workspace">
-        <GenreSelect
-          initialSelectedGenre={searchParams?.genre || ''}
-          genreList={GENRE_LIST_OPTIONS}
-        ></GenreSelect>
-        {movies.totalAmount} MOVIES FOUND
-        <div className="bg-workspace flex flex-wrap mt-2">
-          {movies.data.map((movie) => (
-            <MovieTile key={movie.id} movie={movie}></MovieTile>
-          ))}
-        </div>
-      </div>
+      <MovieList
+        total={movies.totalAmount}
+        movies={movies.data}
+        genre={searchParams?.genre || ''}
+      ></MovieList>
     </div>
   );
 }
