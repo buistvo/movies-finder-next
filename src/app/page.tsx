@@ -32,6 +32,7 @@ export default async function Page({
         total={movies.totalAmount}
         movies={movies.data}
         genre={searchParams?.genre || ''}
+        searchParams={searchParams}
       ></MovieList>
     </div>
   );

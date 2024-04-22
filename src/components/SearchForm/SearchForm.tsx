@@ -1,12 +1,31 @@
+'use client';
+
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { Input } from 'postcss';
 import { FormEvent } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { redirect } from 'next/navigation';
 
 export function SearchForm({ query }: { query: string }) {
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  const searchParams = useSearchParams();
+
+  function handleSearch(e: FormEvent<HTMLFormElement>) {
+    const params = new URLSearchParams(searchParams);
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const query = form.get('query');
+    if (query) {
+      params.set('query', query as string);
+    } else {
+      params.delete('query');
+    }
+    replace(`${pathname}?${params.toString()}`);
+  }
+
   return (
     <div className="w-4/5 inline-block">
       <h2 className="font-thin text-left text-2xl">FIND YOUR MOVIE</h2>
-      <form className="flex justify-center">
+      <form onSubmit={handleSearch} className="flex justify-center">
         <input
           data-testid="search-input"
           type="text"

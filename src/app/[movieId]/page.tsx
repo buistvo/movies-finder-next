@@ -27,7 +27,12 @@ export default async function Page({
       <div className="bg-workspace relative p-4 mb-4">
         <div className="flex justify-between relative z-10 pt-4 pr-8 pl-8">
           <AppLogo />
-          <Link href={'/'}>
+          <Link
+            href={{
+              pathname: '/',
+              query: searchParams,
+            }}
+          >
             <button className="bg-workspace text-primary-red hover:bg-gray-900">
               <Image
                 alt="magnifying-icon"
@@ -44,6 +49,7 @@ export default async function Page({
         total={movies.totalAmount}
         movies={movies.data}
         genre={searchParams?.genre || ''}
+        searchParams={searchParams}
       ></MovieList>
     </div>
   );

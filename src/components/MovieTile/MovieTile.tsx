@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 interface MovieTileProps {
   movie: Movie;
+  searchParams?: { [key: string]: string | undefined };
 }
 
 const StyledEllipsis = () => (
@@ -12,24 +13,12 @@ const StyledEllipsis = () => (
   </span>
 );
 
-export function MovieTile({ movie }: MovieTileProps) {
+export function MovieTile({ movie, searchParams }: MovieTileProps) {
   const [isContextMenuOpenState, setIsContextMenuOpenState] = useState(false);
-  // const location = useLocation();
-  //const searchParams = new URLSearchParams(location.search);
-  // const linkUrl = `/${movie.id}?${searchParams.toString()}`;
 
   function handleContextMenuClick() {
     setIsContextMenuOpenState(!isContextMenuOpenState);
   }
-
-  // function handleEditClick() {
-  //   if (onEdit) onEdit(movie);
-  // }
-
-  // function handleDeleteClick() {
-  //   if (onDelete) onDelete(movie);
-  // }
-
   return (
     <div className="block relative text-secondary-text mx-6 w-auto">
       <div className="absolute right-0">
@@ -37,16 +26,10 @@ export function MovieTile({ movie }: MovieTileProps) {
           <div className="grid h-32 w-64 bg-workspace m-2">
             <button onClick={handleContextMenuClick}>{'\u2715'}</button>
             <div>
-              <button
-                className="w-full bg-workspace text-secondary-text"
-                //  onClick={handleEditClick}
-              >
+              <button className="w-full bg-workspace text-secondary-text">
                 Edit
               </button>
-              <button
-                className="w-full bg-workspace text-secondary-text"
-                // onClick={handleDeleteClick}
-              >
+              <button className="w-full bg-workspace text-secondary-text">
                 Delete
               </button>
             </div>
@@ -61,7 +44,13 @@ export function MovieTile({ movie }: MovieTileProps) {
           </button>
         )}
       </div>
-      <Link href={movie.id.toString()}>
+      <Link
+        href={{
+          pathname: movie.id.toString(),
+          query: searchParams,
+        }}
+      >
+        {' '}
         <img
           className="min-w-64 h-96 w-64"
           alt={movie.name}
