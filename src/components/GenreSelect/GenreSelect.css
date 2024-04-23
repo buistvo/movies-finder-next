@@ -1,0 +1,31 @@
+.genre-list {
+  display: flex;
+  max-width: 55vw;
+  overflow: hidden;
+  button {
+    border-radius: 0;
+    padding: 1rem;
+    margin: 0;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    background: none;
+    font-size: inherit;
+    cursor: pointer;
+    position: relative;
+  }
+  button::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: grey;
+  }
+}
+
+button.selected::after {
+  background-color: var(--primary-red);
+  z-index: 2;
+}

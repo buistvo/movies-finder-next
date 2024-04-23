@@ -3,22 +3,27 @@ import { PaginatedResponse } from '../types/paginated-response';
 import { Movie } from '../types/movie';
 
 export class MoviesService {
-  // async getAll(
-  //   params?: MovieQueryParams,
-  //   cancellationToken?: CancelTokenSource
-  // ): Promise<PaginatedResponse<Movie[]>> {
-  //   const response = await axios.get<PaginatedResponse<MoviesResponse[]>>(
-  //     'http://localhost:4000/movies',
-  //     {
-  //       cancelToken: cancellationToken?.token,
-  //       params,
-  //     }
-  //   );
-  //   return {
-  //     ...response.data,
-  //     data: response.data.data.map((movie) => this.mapResponse(movie)),
-  //   };
-  // }
+  async getAll(params?: {
+    [key: string]: string | undefined;
+  }): Promise<PaginatedResponse<Movie[]>> {
+    let query = '';
+    if (params) {
+      query = Object.keys(params)
+        .map((key) => params[key] && `${key}=${params[key]}`)
+        .filter((p) => p && p.length)
+        .join('&');
+    }
+    const response = await fetch(`http://localhost:4000/movies?${query}`, {
+      method: 'GET',
+    });
+    const responseData: PaginatedResponse<MoviesResponse[]> =
+      await response.json();
+
+    return {
+      ...responseData,
+      data: responseData.data.map((movie) => this.mapResponse(movie)),
+    };
+  }
 
   async getById(id: string): Promise<Movie> {
     console.log('getById', id);

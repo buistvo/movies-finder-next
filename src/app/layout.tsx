@@ -1,6 +1,7 @@
 import './globals.css';
+import { AppLogo } from '@/components/AppLogo/AppLogo';
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -8,7 +9,12 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <div>{children}</div>
+        <div>
+          <div>{children}</div>
+        </div>
+        <footer className="bg-workspace-footer">
+          <AppLogo />
+        </footer>
       </body>
     </html>
   );

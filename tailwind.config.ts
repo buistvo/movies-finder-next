@@ -16,7 +16,11 @@ const config: Config = {
       colors: {
         'primary-red': 'var(--primary-red)',
         'hover-red': 'var(--hover-red)',
+        workspace: 'var(--workspace)',
         'secondary-color': 'var(--secondary-color)',
+        'secondary-text': 'var(--secondary-text)',
+        background: 'var(--background)',
+        'workspace-footer': 'var(--workspace-footer)',
       },
     },
   },
